@@ -61,3 +61,13 @@ with open(budget_csv) as csvfile:
     print("Average Change: " + "$" + str(int(average_change_profits)))
     print("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
     print("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
+
+
+    #txt_file.write("----------------------------------------")
+    #txt_file.write("Financial Analysis")
+    #txt_file.write("----------------------------------------")
+    #txt_file.write("Total Months: " + str(month_count))
+    #txt_file.write("Total Profits: " + "$" + str(total_profit))
+    #txt_file.write("Average Change: " + "$" + str(int(average_change_profits)))
+    #txt_file.write("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
+    #txt_file.write("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
