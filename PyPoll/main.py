@@ -7,7 +7,6 @@ election_csv=os.path.join("Resources","election_data.csv")
 
 #variable
 votes = []
-    #county = []
 candidates = []
 khan = []
 correy = []
@@ -23,7 +22,6 @@ with open(election_csv) as csvfile:
     #read each row
     for row in csvreader:
         votes.append(int(row[0]))
-        #county.append(row[1])
         candidates.append(row[2])
 
     #VOTE COUNT
@@ -60,7 +58,7 @@ with open(election_csv) as csvfile:
     #print(li_percent)
     #print(otooley_percent)
     
-    #Winner 
+    #Determine the winner 
     if khan_percent > max(correy_percent, li_percent, otooley_percent):
         winner = "Khan"
     elif correy_percent > max(khan_percent, li_percent, otooley_percent):
@@ -70,7 +68,7 @@ with open(election_csv) as csvfile:
     else:
         winner = "O'Tooley"
 
-        #Print Statements
+#Print Results
 
 print(f"Election Results") 
 print(f"-----------------------------------") 
@@ -83,3 +81,23 @@ print(f"O'Tooley: {otooley_percent}% ({otooley_votes})")
 print(f"-----------------------------------") 
 print(f"Winner: {winner}") 
 print(f"-----------------------------------")
+
+#Export Results
+output_file = os.path.join("Analysis","election_results.txt")
+with open(output_file, 'w') as text:
+
+    # Initialize csv.writer
+    #csvwriter = csv.writer(csvfile, delimiter=',')
+
+    # Write the first row (column headers)
+    text.write(f"Election Results" + "\n") 
+    text.write(f"-----------------------------------\n") 
+    text.write(f"Total Votes: {total_votes}"+ "\n") 
+    text.write(f"-----------------------------------\n") 
+    text.write(f"Khan: {khan_percent}% ({khan_votes})"+ "\n") 
+    text.write(f"Correy: {correy_percent}% ({correy_votes})"+ "\n") 
+    text.write(f"Li: {li_percent}% ({li_votes})"+ "\n") 
+    text.write(f"O'Tooley: {otooley_percent}% ({otooley_votes})"+ "\n") 
+    text.write(f"-----------------------------------\n") 
+    text.write(f"Winner: {winner}"+ "\n") 
+    text.write(f"-----------------------------------")
