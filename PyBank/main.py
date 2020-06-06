@@ -1,13 +1,8 @@
 # Your task is to create a Python script that analyzes the records to calculate each of the following:
-
   # The total number of months included in the dataset
-
   # The net total amount of "Profit/Losses" over the entire period
-
   # The average of the changes in "Profit/Losses" over the entire period
-
   # The greatest increase in profits (date and amount) over the entire period
-
   # The greatest decrease in losses (date and amount) over the entire period
 
 import os
@@ -30,9 +25,9 @@ with open(budget_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     #read the header row first
     csv_header = next(csvfile)
-    #print(f"Header: {csv_header}")
     
-    #read each row
+    # The total number of months included in the dataset
+    # The net total amount of "Profit/Losses" over the entire period
     for row in csvreader:
         month_count = month_count +1
         total_profit = total_profit + int(row[1])
@@ -44,15 +39,18 @@ with open(budget_csv) as csvfile:
         monthly_change.append(monthly_change_profits)
         initial_profit = int(row[1])
 
-
+        # The average of the changes in "Profit/Losses" over the entire period
         average_change_profits = (monthly_change_profits/month_count)
-
+        
+        # The greatest increase in profits (date and amount) over the entire period
+        # The greatest decrease in losses (date and amount) over the entire period
         greatest_increase_profits = max(monthly_change)
         greatest_decrease_profits = min(monthly_change)
 
         increase_date= date[monthly_change.index(greatest_increase_profits)]
         decrease_date =date[monthly_change.index(greatest_decrease_profits)]
 
+    #In addition, your final script should both print the analysis to the terminal and export a text file with the results.
     print("----------------------------------------")
     print("Financial Analysis")
     print("----------------------------------------")
@@ -62,9 +60,7 @@ with open(budget_csv) as csvfile:
     print("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
     print("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
 
-
-
-    #Export Results
+    #Export results as text file
 output_file = os.path.join("Analysis","financial_analysis.txt")
 with open(output_file, 'w') as text:
     text.write("----------------------------------------\n")
