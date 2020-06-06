@@ -1,4 +1,9 @@
-
+#Your task is to create a Python script that analyzes the votes and calculates each of the following:
+# The total number of votes cast
+# A complete list of candidates who received votes
+# The percentage of votes each candidate won
+# The total number of votes each candidate won
+# The winner of the election based on popular vote.
 
 import os
 import csv
@@ -17,18 +22,17 @@ with open(election_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     #read the header row first
     csv_header = next(csvfile)
-    #print(f"Header: {csv_header}")
     
     #read each row
     for row in csvreader:
         votes.append(int(row[0]))
+        # A complete list of candidates who received votes
         candidates.append(row[2])
 
-    #VOTE COUNT
+    # The total number of votes cast
     total_votes = (len(votes))
-    #print(total_votes)
-
-    #Votes by Person
+    
+    # The total number of votes each candidate won
     for candidate in candidates:
         if candidate == "Khan":
             khan.append(candidates)
@@ -41,24 +45,15 @@ with open(election_csv) as csvfile:
             li_votes = len(li)
         else:
             otooley.append(candidates)
-            otooley_votes = len(otooley)
-    #print(khan_votes)
-    #print(correy_votes)
-    #print(li_votes)
-    #print(otooley_votes)
+            otooley_votes = len(otooley)    
     
-    
-    #Percentages
+    # The percentage of votes each candidate won
     khan_percent = round(((khan_votes / total_votes) * 100), 3)
     correy_percent = round(((correy_votes / total_votes) * 100), 3)
     li_percent = round(((li_votes / total_votes) * 100), 3)
     otooley_percent = round(((otooley_votes / total_votes) * 100), 3)
-    #print(khan_percent)
-    #print(correy_percent)
-    #print(li_percent)
-    #print(otooley_percent)
     
-    #Determine the winner 
+    # The winner of the election based on popular vote.
     if khan_percent > max(correy_percent, li_percent, otooley_percent):
         winner = "Khan"
     elif correy_percent > max(khan_percent, li_percent, otooley_percent):
@@ -69,7 +64,6 @@ with open(election_csv) as csvfile:
         winner = "O'Tooley"
 
 #Print Results
-
 print(f"Election Results") 
 print(f"-----------------------------------") 
 print(f"Total Votes: {total_votes}") 
@@ -86,10 +80,6 @@ print(f"-----------------------------------")
 output_file = os.path.join("Analysis","election_results.txt")
 with open(output_file, 'w') as text:
 
-    # Initialize csv.writer
-    #csvwriter = csv.writer(csvfile, delimiter=',')
-
-    # Write the first row (column headers)
     text.write(f"Election Results" + "\n") 
     text.write(f"-----------------------------------\n") 
     text.write(f"Total Votes: {total_votes}"+ "\n") 
