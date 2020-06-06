@@ -36,13 +36,14 @@ with open(budget_csv) as csvfile:
     for row in csvreader:
         month_count = month_count +1
         total_profit = total_profit + int(row[1])
-        
+
         date.append(row[0])
         profit.append(row[1])
-            
+
         monthly_change_profits = int(row[1]) - initial_profit
-        initial_profit = int(row[1])
         monthly_change.append(monthly_change_profits)
+        initial_profit = int(row[1])
+
 
         average_change_profits = (monthly_change_profits/month_count)
 
@@ -62,11 +63,15 @@ with open(budget_csv) as csvfile:
     print("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
 
 
-    #txt_file.write("----------------------------------------")
-    #txt_file.write("Financial Analysis")
-    #txt_file.write("----------------------------------------")
-    #txt_file.write("Total Months: " + str(month_count))
-    #txt_file.write("Total Profits: " + "$" + str(total_profit))
-    #txt_file.write("Average Change: " + "$" + str(int(average_change_profits)))
-    #txt_file.write("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
-    #txt_file.write("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
+
+    #Export Results
+output_file = os.path.join("Analysis","financial_analysis.txt")
+with open(output_file, 'w') as text:
+    text.write("----------------------------------------\n")
+    text.write("Financial Analysis"+ "\n")
+    text.write("----------------------------------------\n")
+    text.write("Total Months: " + str(month_count)+ "\n")
+    text.write("Total Profits: " + "$" + str(total_profit)+ "\n")
+    text.write("Average Change: " + "$" + str(int(average_change_profits))+ "\n")
+    text.write("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")"+ "\n")
+    text.write("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")"+ "\n")
