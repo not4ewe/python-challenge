@@ -36,14 +36,13 @@ with open(budget_csv) as csvfile:
     for row in csvreader:
         month_count = month_count +1
         total_profit = total_profit + int(row[1])
-
+        
         date.append(row[0])
         profit.append(row[1])
-
+            
         monthly_change_profits = int(row[1]) - initial_profit
-        monthly_change.append(monthly_change_profits)
         initial_profit = int(row[1])
-
+        monthly_change.append(monthly_change_profits)
 
         average_change_profits = (monthly_change_profits/month_count)
 
