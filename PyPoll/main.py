@@ -6,11 +6,13 @@ import csv
 election_csv=os.path.join("Resources","election_data.csv")
 
 #variable
-total_votes = 0
-candidates_list = []
-candidate_votes = {}
-winning_count = 0
-winning_candidate = ""
+votes = []
+    #county = []
+candidates = []
+khan = []
+correy = []
+li = []
+otooley = []
 
 with open(election_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -20,44 +22,64 @@ with open(election_csv) as csvfile:
     
     #read each row
     for row in csvreader:
-        # Add to the total vote count
-        total_votes = total_votes + 1
+        votes.append(int(row[0]))
+        #county.append(row[1])
+        candidates.append(row[2])
 
-        # Extract the candidate name from each row
-        candidate_name = row[2]
+    #VOTE COUNT
+    total_votes = (len(votes))
+    #print(total_votes)
 
-        # If the candidate does not match any existing candidate...
-        if candidate_name not in candidates_list:
+    #Votes by Person
+    for candidate in candidates:
+        if candidate == "Khan":
+            khan.append(candidates)
+            khan_votes = len(khan)
+        elif candidate == "Correy":
+            correy.append(candidates)
+            correy_votes = len(correy)
+        elif candidate == "Li":
+            li.append(candidates)
+            li_votes = len(li)
+        else:
+            otooley.append(candidates)
+            otooley_votes = len(otooley)
+    #print(khan_votes)
+    #print(correy_votes)
+    #print(li_votes)
+    #print(otooley_votes)
+    
+    
+    #Percentages
+    khan_percent = round(((khan_votes / total_votes) * 100), 3)
+    correy_percent = round(((correy_votes / total_votes) * 100), 3)
+    li_percent = round(((li_votes / total_votes) * 100), 3)
+    otooley_percent = round(((otooley_votes / total_votes) * 100), 3)
+    #print(khan_percent)
+    #print(correy_percent)
+    #print(li_percent)
+    #print(otooley_percent)
+    
+    #Winner 
+    if khan_percent > max(correy_percent, li_percent, otooley_percent):
+        winner = "Khan"
+    elif correy_percent > max(khan_percent, li_percent, otooley_percent):
+        winner = "Correy"  
+    elif li_percent > max(correy_percent, khan_percent, otooley_percent):
+        winner = "Li"
+    else:
+        winner = "O'Tooley"
 
-            # Add it to list of candidates in the running
-            candidates_list.append(candidate_name)
+        #Print Statements
 
-            # Start tracking that candidate's voter count
-            candidate_votes[candidate_name] = 0
-
-        # Add vote to that candidate's count
-        candidate_votes[candidate_name] = candidate_votes[candidate_name] + 1
-
-#print("total_votes:" (total_votes)")
-
-
-
-
-
-    #print("Financial Analysis")
-   # print("----------------------------------------")
-   # print("Total Months: " + str(month_count))
-   # print("Total Profits: " + "$" + str(total_profit))
-   # print("Average Change: " + "$" + str(int(average_change_profits)))
-   # print("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
-   # print("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
-
-
-    #txt_file.write("----------------------------------------")
-    #txt_file.write("Financial Analysis")
-    #txt_file.write("----------------------------------------")
-    #txt_file.write("Total Months: " + str(month_count))
-    #txt_file.write("Total Profits: " + "$" + str(total_profit))
-    #txt_file.write("Average Change: " + "$" + str(int(average_change_profits)))
-    #txt_file.write("Greatest Increase in Profits: " + str(increase_date) + " ($" + str(greatest_increase_profits) + ")")
-    #txt_file.write("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits) + ")")
+print(f"Election Results") 
+print(f"-----------------------------------") 
+print(f"Total Votes: {total_votes}") 
+print("-----------------------------------") 
+print(f"Khan: {khan_percent}% ({khan_votes})") 
+print(f"Correy: {correy_percent}% ({correy_votes})") 
+print(f"Li: {li_percent}% ({li_votes})") 
+print(f"O'Tooley: {otooley_percent}% ({otooley_votes})") 
+print(f"-----------------------------------") 
+print(f"Winner: {winner}") 
+print(f"-----------------------------------")
